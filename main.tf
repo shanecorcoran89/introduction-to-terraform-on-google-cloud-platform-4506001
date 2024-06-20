@@ -20,7 +20,7 @@ ingres_rules = [
     name               = "${var.network_name}-web"
     description       = "Inbound Web"
 
-    source_ranges     = ["0.0.0.0/0]
+    source_ranges     = ["0.0.0.0/0"]
     target_tags       = ["${var.network_name}-web"]
   
 
