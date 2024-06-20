@@ -37,22 +37,6 @@ ingres_rules = [
 }
 
 
-
-resource "google_compute_network" "app" {
-  name                    = var.network_name
-  auto_create_subnetworks = false
-}
-
-
-resource "google_compute_subnetwork" "app" {
-  name          = var.network_name
-  ip_cidr_range = var.network_ip_range
-  region        = var.region
-  network       = google_compute_network.app.id
- 
-  }
-
-
 data "google_compute_image" "ubuntu" {
   most_recent = true
   project     = var.image_project
@@ -64,6 +48,8 @@ resource "google_compute_instance" "blog" {
   machine_type = var.machine_type
 
   
+tags = ["${var.network_name}-web]
+
   boot_disk {
     initialize_params {
       image = data.google_compute_image.ubuntu.self_link
@@ -76,6 +62,8 @@ resource "google_compute_instance" "blog" {
     }
   }  
 
+
+metadata_startup_script = "apt -y update; apt -y install nginx; echo ${var.app_name} > /var/www/html/index.html"
 allow_stopping_for_update = true
 
 }
