@@ -3,8 +3,8 @@ variable "project_id" {
     default = "lil-learning-terraform"
 }
 
-variable "region" {}
-    type= string
+variable "region" {
+    type = string
     default = "us-west1"
 }
 
@@ -15,7 +15,7 @@ variable "network_name" {
 }
 
 
-variable "network_ip_range" {}
+variable "network_ip_range" {
     type= string
     default = "10.2.0.0/16"
 }
